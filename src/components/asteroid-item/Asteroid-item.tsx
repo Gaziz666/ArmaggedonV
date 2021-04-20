@@ -5,7 +5,7 @@ import 'moment/locale/ru'
 import { AsteroidType } from '../../features/asteroids/types'
 import styles from './asteroid-item.module.css'
 import dinoImg from '../../assets/img/dino.svg'
-import asteroidImg from '../../assets/img/meteor.png'
+import asteroidImg from '../../assets/img/meteorSvg.svg'
 import { RootReducerType } from '../../store'
 import { Distance } from '../../features/filter/types'
 
@@ -31,18 +31,32 @@ const AsteroidItem: React.FC<Props> = (asteroid) => {
     .split('')
     .filter((item) => item !== '(' && item !== ')')
     .join('')
+
+  const standardSize = 186
+  const asteroidImgSize = Math.round(
+    (diameter.meters.estimated_diameter_max * 100) / standardSize
+  )
   return (
     <div
       className={`${styles['item-container']} ${
         isDanger ? styles['bcg-danger'] : styles['bcg-normal']
       }`}
     >
-      <div className={styles['dino-block']}>
+      <div
+        className={`${styles['dino-block']} ${
+          isDanger ? styles['dino-bcg-danger'] : styles['dino-bcg-normal']
+        }`}
+      >
         <div className={styles['asteroid-img-wrapper']}>
-          <img src={asteroidImg} alt="meteor" />
+          <img
+            src={asteroidImg}
+            alt="meteor"
+            width={`${asteroidImgSize}%`}
+            height={`${asteroidImgSize}%`}
+          />
         </div>
         <div className={styles.dino}>
-          <img src={dinoImg} alt="dino" />
+          <img className={styles['dino-img']} src={dinoImg} alt="dino" />
         </div>
       </div>
       <div className={styles.info}>
