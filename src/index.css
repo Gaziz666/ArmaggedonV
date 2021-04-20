@@ -18,6 +18,13 @@
   box-sizing: border-box;
 }
 
+html {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+}
+
 body {
   margin: 0;
   font-family: Helvetica, -apple-system, BlinkMacSystemFont, 'Segoe UI',
@@ -29,6 +36,11 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+}
+
+#root {
+  width: 100%;
+  padding: 0 16px;
 }
 
 code {
@@ -62,14 +74,4 @@ a:active {
 
 li {
   list-style: none;
-}
-
-.px1 {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.group {
-  display: flex;
-  justify-content: space-between;
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { Header } from './components/header/Header'
 import { About } from './pages/About'
-import { Home } from './pages/Home'
+import { Asteroids } from './pages/asteroids/Asteroids'
 
 const App: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ const App: React.FC = () => {
       <Header />
       <div className="container">
         <Switch>
-          <Route path="/" component={Home} exact />
+          <Route path="/" component={Asteroids} exact />
           <Route path="/about" component={About} />
         </Switch>
       </div>

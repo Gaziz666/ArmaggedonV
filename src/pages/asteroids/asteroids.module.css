@@ -1,0 +1,29 @@
+.section {
+  display: flex;
+  max-width: 920px;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.input-wrapper {
+  margin-top: 16px;
+}
+
+@media (max-width: 634px) {
+  .checkbox-container {
+    margin-bottom: 16px;
+  }
+}

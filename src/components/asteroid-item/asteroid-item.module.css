@@ -1,0 +1,94 @@
+.item-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  min-height: 200px;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.bcg-normal {
+  background: linear-gradient(90deg, #cff37d 0%, #7de88c 100%);
+}
+
+.bcg-danger {
+  background: linear-gradient(90deg, #ffb199 0%, #ff0844 100%);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  width: 31.4%;
+}
+
+.info-name {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 32px;
+  text-decoration-line: underline;
+  margin-bottom: 16px;
+}
+
+.info-text-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.info-text-container div:nth-child(2) {
+  flex: 1 0;
+  border-bottom: 1px dotted #000;
+  height: 1em;
+  margin: 0 0.4em;
+}
+
+.danger-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  width: 30.8%;
+}
+
+.danger-block-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.danger {
+  font-weight: bold;
+}
+.button {
+  background: #186dd6;
+  border-radius: 24px;
+  padding: 10px 16px;
+  margin: 8px 24px;
+  color: #fff;
+}
+
+.dino-block {
+  display: flex;
+  width: 37.7%;
+  height: 198px;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.dino {
+  align-self: flex-start;
+  margin-left: 16px;
+  margin-right: 8px;
+}
+
+.asteroid-img-wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

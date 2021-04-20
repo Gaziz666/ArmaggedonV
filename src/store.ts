@@ -1,15 +1,32 @@
-import { combineReducers, createStore } from 'redux'
-import { devToolsEnhancer } from 'redux-devtools-extension'
-import { CounterReducer } from './features/counter'
+import { combineReducers, createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import thunkMiddleware from 'redux-thunk'
+import { AsteroidsReducer } from './features/asteroids'
+import { AsteroidsState } from './features/asteroids/types'
+import { FilterReducer } from './features/filter'
+import { FilterState } from './features/filter/types'
+import { loadState, saveState } from './localStore'
 
-/* Create root reducer, containing all features of the application */
+export type RootReducerType = {
+  filterState: FilterState
+  asteroidsState: AsteroidsState
+}
+
 const rootReducer = combineReducers({
-  count: CounterReducer,
+  filterState: FilterReducer,
+  asteroidsState: AsteroidsReducer,
 })
+
+const persistedState = loadState()
 
 const store = createStore(
   rootReducer,
-  /* preloadedState, */ devToolsEnhancer({})
+  persistedState,
+  composeWithDevTools(applyMiddleware(thunkMiddleware))
 )
+
+store.subscribe(() => {
+  saveState(store.getState())
+})
 
 export default store
