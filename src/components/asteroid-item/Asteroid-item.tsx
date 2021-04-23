@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 import 'moment/locale/ru'
 import { AsteroidType } from '../../features/asteroids/types'
@@ -8,6 +8,7 @@ import dinoImg from '../../assets/img/dino.svg'
 import asteroidImg from '../../assets/img/meteorSvg.svg'
 import { RootReducerType } from '../../store'
 import { Distance } from '../../features/filter/types'
+import { destroyedListUpdate } from '../../features/asteroids/asteroidsActions'
 
 type Props = {
   asteroid: AsteroidType
@@ -15,6 +16,10 @@ type Props = {
 
 const AsteroidItem: React.FC<Props> = (asteroid) => {
   const filter = useSelector((state: RootReducerType) => state.filterState)
+  const destroyedList = useSelector(
+    (state: RootReducerType) => state.asteroidsState.destroyedList
+  )
+  const dispatch = useDispatch()
   const {
     name,
     is_potentially_hazardous_asteroid: isDanger,
@@ -36,6 +41,14 @@ const AsteroidItem: React.FC<Props> = (asteroid) => {
   const asteroidImgSize = Math.round(
     (diameter.meters.estimated_diameter_max * 100) / standardSize
   )
+
+  const toDestroy = () => {
+    const mySet = new Set(destroyedList)
+    mySet.add(asteroid.asteroid)
+    const newDestroyedList = Array.from(mySet)
+    dispatch(destroyedListUpdate(newDestroyedList))
+  }
+
   return (
     <div
       className={`${styles['item-container']} ${
@@ -88,7 +101,7 @@ const AsteroidItem: React.FC<Props> = (asteroid) => {
         <div className={styles['danger-block-inner']}>
           <p>Оценка</p>
           <p className={styles.danger}>{isDanger ? 'опасен' : 'не опасен'}</p>
-          <button type="button" className={styles.button}>
+          <button type="button" className={styles.button} onClick={toDestroy}>
             На уничтожение
           </button>
         </div>

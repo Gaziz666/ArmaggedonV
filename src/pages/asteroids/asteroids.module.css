@@ -22,6 +22,11 @@
   margin-top: 16px;
 }
 
+.list-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
 @media (max-width: 634px) {
   .checkbox-container {
     margin-bottom: 16px;

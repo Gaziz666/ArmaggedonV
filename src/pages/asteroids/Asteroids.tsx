@@ -15,7 +15,9 @@ const Asteroids: React.FC = () => {
           <DistanceRadio />
         </div>
       </div>
-      <AsteroidList />
+      <div className={styles['list-wrapper']}>
+        <AsteroidList />
+      </div>
     </section>
   )
 }

@@ -5,7 +5,7 @@ interface AsteroidListRequestedActionType {
 
 interface AsteroidListLoadedActionType {
   type: string
-  payload: unknown
+  payload: AsteroidListType
 }
 
 interface AsteroidListLoadErrActionType {
@@ -13,15 +13,30 @@ interface AsteroidListLoadErrActionType {
   payload: string
 }
 
+interface AsteroidViewListActionType {
+  type: string
+  payload: Array<AsteroidType>
+}
+
+interface DestroyedListActionType {
+  type: string
+  payload: AsteroidType
+}
+
 export type AsteroidsActionTypes =
   | AsteroidListLoadedActionType
   | AsteroidListRequestedActionType
   | AsteroidListLoadErrActionType
+  | AsteroidViewListActionType
+  | DestroyedListActionType
 
 export interface AsteroidsState {
   isLoading: boolean
   asteroidsData: AsteroidListType
+  asteroidsArr: Array<AsteroidType>
   errMsg: string
+  listCounter: number
+  destroyedList: Array<AsteroidType>
 }
 
 export type AsteroidListType = {

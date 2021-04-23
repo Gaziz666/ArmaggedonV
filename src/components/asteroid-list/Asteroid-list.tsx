@@ -1,33 +1,102 @@
-import React, { useEffect, useState } from 'react'
+import moment from 'moment'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAsteroidList } from '../../features/asteroids/asteroidsActions'
+import {
+  asteroidViewListUpdate,
+  fetchAsteroidList,
+  listCounterInc,
+} from '../../features/asteroids/asteroidsActions'
+import { scrollDown } from '../../features/filter/filterActions'
 import { RootReducerType } from '../../store'
 import { AsteroidItem } from '../asteroid-item/Asteroid-item'
-// import styles from './asteroid-list.module.css'
+import { Spinner } from '../spinner/Spinner'
+import styles from './asteroid-list.module.css'
 
 const AsteroidList: React.FC = () => {
-  const asteroidsObj = useSelector(
-    (state: RootReducerType) => state.asteroidsState.asteroidsData
+  const asteroidsState = useSelector(
+    (state: RootReducerType) => state.asteroidsState
   )
+  const didMountAsteroidsArr = useRef(false)
+  const didMountCounter = useRef(false)
+
+  const { asteroidsArr, asteroidsData, listCounter, isLoading } = asteroidsState
+  const filterState = useSelector((state: RootReducerType) => state.filterState)
+  const { isDanger, scrollIsDown } = filterState
   const dispatch = useDispatch()
   const [asteroidsList, setList] = useState<JSX.Element[]>()
 
   useEffect(() => {
-    dispatch(fetchAsteroidList())
+    if (Object.keys(asteroidsData).length === 0) {
+      dispatch(fetchAsteroidList())
+    }
   }, [])
 
-  let data = null
   useEffect(() => {
-    if (asteroidsObj) {
-      const dateList = Object.keys(asteroidsObj).sort()
-      data = asteroidsObj[dateList[0]].map((asteroid) => (
-        <AsteroidItem asteroid={asteroid} key={asteroid.id} />
-      ))
+    if (!didMountCounter.current) {
+      didMountCounter.current = true
+      return
+    }
+    let length = 0
+    console.log('use effect _counter')
+    if (Object.keys(asteroidsData).length > 0) {
+      length = Object.keys(asteroidsData).length
+    }
+    console.log(listCounter, length - 1, didMountCounter.current)
+
+    if (scrollIsDown && listCounter < length - 1) {
+      console.log(listCounter, length - 1)
+      dispatch(scrollDown(false))
+      dispatch(listCounterInc())
+    } else if (scrollIsDown && listCounter === length - 1 && !isLoading) {
+      const dateList = Object.keys(asteroidsData).sort()
+      const lastDate = dateList[listCounter]
+      const nextDate = moment(lastDate).add(1, 'days').format('YYYY-MM-DD')
+
+      dispatch(fetchAsteroidList(nextDate))
+    }
+  }, [scrollIsDown, listCounter, isDanger])
+
+  useEffect(() => {
+    if (!didMountAsteroidsArr.current) {
+      didMountAsteroidsArr.current = true
+      return
+    }
+    console.log('use Effect + arr')
+    if (Object.keys(asteroidsData).length > 0 && !isLoading) {
+      console.log(listCounter)
+      const dateList = Object.keys(asteroidsData).sort()
+      dispatch(asteroidViewListUpdate(asteroidsData[dateList[listCounter]]))
+    }
+  }, [asteroidsData, listCounter])
+
+  useEffect(() => {
+    if (asteroidsArr) {
+      const data = asteroidsArr
+        .filter((asteroid) => {
+          if (isDanger && asteroid.is_potentially_hazardous_asteroid) {
+            return asteroid
+          }
+          if (isDanger && !asteroid.is_potentially_hazardous_asteroid) {
+            return false
+          }
+          return asteroid
+        })
+        .map((asteroid) => (
+          <AsteroidItem asteroid={asteroid} key={asteroid.id} />
+        ))
+
       setList(data)
     }
-  }, [asteroidsObj])
+  }, [asteroidsArr, isDanger])
 
-  return <>{asteroidsList}</>
+  return (
+    <>
+      {asteroidsList}
+      <div className={styles['spinner-wrapper']}>
+        {isLoading ? <Spinner /> : null}
+      </div>
+    </>
+  )
 }
 
 export { AsteroidList }

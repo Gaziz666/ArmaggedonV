@@ -4,8 +4,11 @@ import {
   ASTEROIDS_LIST_ERROR,
   ASTEROIDS_LIST_LOADED,
   ASTEROIDS_LIST_LOADING,
+  ASTEROIDS_VIEW_LIST_UPDATE,
+  DESTROYED_LIST_UPDATE,
+  LIST_COUNTER_INC,
 } from './actionTypes'
-import { AsteroidListType, AsteroidsActionTypes } from './types'
+import { AsteroidListType, AsteroidsActionTypes, AsteroidType } from './types'
 import { API, APIkey } from '../api'
 
 export const asteroidListRequested = () => ({
@@ -23,19 +26,36 @@ export const asteroidListLoadErr = (msg: string) => ({
   payload: msg,
 })
 
-export const fetchAsteroidList = () => async (
+export const asteroidViewListUpdate = (arr: Array<AsteroidType>) => ({
+  type: ASTEROIDS_VIEW_LIST_UPDATE,
+  payload: arr,
+})
+
+export const listCounterInc = () => ({
+  type: LIST_COUNTER_INC,
+  payload: null,
+})
+
+export const destroyedListUpdate = (value: Array<AsteroidType>) => ({
+  type: DESTROYED_LIST_UPDATE,
+  payload: value,
+})
+
+export const fetchAsteroidList = (date?: string) => async (
   dispatch: Dispatch<AsteroidsActionTypes>
 ) => {
   dispatch(asteroidListRequested())
   try {
     const today = moment().format('YYYY-MM-DD')
-    console.log(today)
     const response = await API.get('/feed', {
       params: {
-        start_date: today,
+        start_date: date || today,
         api_key: APIkey,
       },
     })
+    if (date) {
+      dispatch(listCounterInc())
+    }
     dispatch(asteroidListLoaded(response.data.near_earth_objects))
   } catch (err) {
     dispatch(asteroidListLoadErr(err.message))

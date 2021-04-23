@@ -1,12 +1,10 @@
-import { DANGER_CHECKBOX_CHANGE, DISTANCE_RADIO_CHANGE } from './actionTypes'
-
 interface DangerCheckboxChangeAction {
-  type: typeof DANGER_CHECKBOX_CHANGE
+  type: string
   payload: boolean
 }
 
 interface DistanceRadioChangeActionChange {
-  type: typeof DISTANCE_RADIO_CHANGE
+  type: string
   payload: string
 }
 
@@ -17,9 +15,16 @@ export type FilterActionTypes =
 export interface FilterState {
   isDanger: boolean
   distance: Distance
+  scrollIsDown: boolean
+  pageType: PageType
 }
 
 export enum Distance {
   km = 'KM',
   moon = 'MOON',
+}
+
+export enum PageType {
+  asteroids = 'ASTEROID',
+  destroyed = 'DESTROYED',
 }

@@ -41,7 +41,7 @@
   margin-right: 24px;
 }
 
-.nav-item {
+.nav-item-inactive {
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -50,8 +50,11 @@
 }
 
 .nav-item-active {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
   font-weight: bold;
-  text-decoration-line: none;
 }
 
 .nav-item:target {
