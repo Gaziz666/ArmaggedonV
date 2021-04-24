@@ -23,12 +23,18 @@ interface DestroyedListActionType {
   payload: AsteroidType
 }
 
+interface DetailListActionType {
+  type: string
+  payload: Array<DetailType>
+}
+
 export type AsteroidsActionTypes =
   | AsteroidListLoadedActionType
   | AsteroidListRequestedActionType
   | AsteroidListLoadErrActionType
   | AsteroidViewListActionType
   | DestroyedListActionType
+  | DetailListActionType
 
 export interface AsteroidsState {
   isLoading: boolean
@@ -37,6 +43,7 @@ export interface AsteroidsState {
   errMsg: string
   listCounter: number
   destroyedList: Array<AsteroidType>
+  asteroidDetails: Array<DetailType>
 }
 
 export type AsteroidListType = {
@@ -71,24 +78,24 @@ export type AsteroidType = {
     }
   }
   is_potentially_hazardous_asteroid: boolean
-  close_approach_data: [
-    {
-      close_approach_date: string
-      close_approach_date_full: string
-      epoch_date_close_approach: number
-      relative_velocity: {
-        kilometers_per_second: string
-        kilometers_per_hour: string
-        miles_per_hour: string
-      }
-      miss_distance: {
-        astronomical: string
-        lunar: string
-        kilometers: string
-        miles: string
-      }
-      orbiting_body: string
-    }
-  ]
+  close_approach_data: Array<DetailType>
   is_sentry_object: boolean
+}
+
+export type DetailType = {
+  close_approach_date: string
+  close_approach_date_full: string
+  epoch_date_close_approach: number
+  relative_velocity: {
+    kilometers_per_second: string
+    kilometers_per_hour: string
+    miles_per_hour: string
+  }
+  miss_distance: {
+    astronomical: string
+    lunar: string
+    kilometers: string
+    miles: string
+  }
+  orbiting_body: string
 }

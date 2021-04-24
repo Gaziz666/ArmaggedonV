@@ -37,14 +37,12 @@ const AsteroidList: React.FC = () => {
       return
     }
     let length = 0
-    console.log('use effect _counter')
+
     if (Object.keys(asteroidsData).length > 0) {
       length = Object.keys(asteroidsData).length
     }
-    console.log(listCounter, length - 1, didMountCounter.current)
 
     if (scrollIsDown && listCounter < length - 1) {
-      console.log(listCounter, length - 1)
       dispatch(scrollDown(false))
       dispatch(listCounterInc())
     } else if (scrollIsDown && listCounter === length - 1 && !isLoading) {
@@ -61,9 +59,8 @@ const AsteroidList: React.FC = () => {
       didMountAsteroidsArr.current = true
       return
     }
-    console.log('use Effect + arr')
+
     if (Object.keys(asteroidsData).length > 0 && !isLoading) {
-      console.log(listCounter)
       const dateList = Object.keys(asteroidsData).sort()
       dispatch(asteroidViewListUpdate(asteroidsData[dateList[listCounter]]))
     }

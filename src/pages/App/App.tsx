@@ -2,12 +2,14 @@ import React, { useEffect, useRef } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Header } from '../../components/header/Header'
-import { About } from '../About'
 import { Asteroids } from '../asteroids/Asteroids'
 import { Path } from '../../utils/constants'
 import styles from './app.module.css'
 import { scrollDown } from '../../features/filter/filterActions'
 import { RootReducerType } from '../../store'
+import { DestroyedPage } from '../destroyed-page/Destroyed-page'
+import { AsteroidDetails } from '../asteroid-details/Asteroid-details'
+import { Footer } from '../../components/footer/Footer'
 
 const App: React.FC = () => {
   const asteroidsArr = useSelector(
@@ -35,21 +37,15 @@ const App: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    if (asteroidsArr) {
-      console.log(
+    if (
+      asteroidsArr &&
+      !(
         (main.current! as HTMLElement).scrollHeight -
           Math.abs((main.current! as HTMLElement).scrollTop) ===
-          (main.current! as HTMLElement).clientHeight
+        (main.current! as HTMLElement).clientHeight
       )
-      if (
-        !(
-          (main.current! as HTMLElement).scrollHeight -
-            Math.abs((main.current! as HTMLElement).scrollTop) ===
-          (main.current! as HTMLElement).clientHeight
-        )
-      ) {
-        dispatch(scrollDown(true))
-      }
+    ) {
+      dispatch(scrollDown(true))
     }
   }, [asteroidsArr])
 
@@ -57,11 +53,13 @@ const App: React.FC = () => {
     <BrowserRouter>
       <div ref={main} className={styles.main}>
         <Header />
-
         <Switch>
           <Route path={Path.asteroids} component={Asteroids} exact />
-          <Route path={Path.destroyed} component={About} />
+          <Route path={Path.destroyed} component={DestroyedPage} exact />
+          <Route path={`${Path.asteroids}/:id`} component={AsteroidDetails} />
+          <Route path={`${Path.destroyed}/:id`} component={AsteroidDetails} />
         </Switch>
+        <Footer />
       </div>
     </BrowserRouter>
   )

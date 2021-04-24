@@ -1,17 +1,19 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import 'moment/locale/ru'
 import { AsteroidType } from '../../features/asteroids/types'
 import styles from './asteroid-item.module.css'
 import dinoImg from '../../assets/img/dino.svg'
 import asteroidImg from '../../assets/img/meteorSvg.svg'
 import { RootReducerType } from '../../store'
-import { Distance } from '../../features/filter/types'
+import { Distance, PageType } from '../../features/filter/types'
 import { destroyedListUpdate } from '../../features/asteroids/asteroidsActions'
+import { ButtonDanger } from '../button-danger/Button-danger'
 
 type Props = {
-  asteroid: AsteroidType
+  asteroid?: AsteroidType
 }
 
 const AsteroidItem: React.FC<Props> = (asteroid) => {
@@ -20,13 +22,15 @@ const AsteroidItem: React.FC<Props> = (asteroid) => {
     (state: RootReducerType) => state.asteroidsState.destroyedList
   )
   const dispatch = useDispatch()
+  const history = useHistory()
+  const match = useRouteMatch()
   const {
     name,
     is_potentially_hazardous_asteroid: isDanger,
     close_approach_data: distanceData,
     estimated_diameter: diameter,
     // eslint-disable-next-line react/destructuring-assignment
-  } = asteroid.asteroid
+  } = asteroid.asteroid!
 
   moment.locale('ru')
   const date = moment(distanceData[0].close_approach_date).format(
@@ -44,9 +48,12 @@ const AsteroidItem: React.FC<Props> = (asteroid) => {
 
   const toDestroy = () => {
     const mySet = new Set(destroyedList)
-    mySet.add(asteroid.asteroid)
+    mySet.add(asteroid.asteroid!)
     const newDestroyedList = Array.from(mySet)
     dispatch(destroyedListUpdate(newDestroyedList))
+  }
+  const toAsteroidDetail = () => {
+    history.push(`${match.url}/:${asteroid.asteroid!.id}`)
   }
 
   return (
@@ -73,7 +80,13 @@ const AsteroidItem: React.FC<Props> = (asteroid) => {
         </div>
       </div>
       <div className={styles.info}>
-        <h3 className={styles['info-name']}>{AsteroidName}</h3>
+        <h3
+          className={styles['info-name']}
+          onClick={toAsteroidDetail}
+          aria-hidden
+        >
+          {AsteroidName}
+        </h3>
         <div className={styles['info-text-container']}>
           <div>Дата</div>
           <div />
@@ -101,9 +114,11 @@ const AsteroidItem: React.FC<Props> = (asteroid) => {
         <div className={styles['danger-block-inner']}>
           <p>Оценка</p>
           <p className={styles.danger}>{isDanger ? 'опасен' : 'не опасен'}</p>
-          <button type="button" className={styles.button} onClick={toDestroy}>
-            На уничтожение
-          </button>
+          {filter.pageType === PageType.asteroids ? (
+            <ButtonDanger handleClick={() => toDestroy()}>
+              На уничтожение
+            </ButtonDanger>
+          ) : null}
         </div>
       </div>
     </div>

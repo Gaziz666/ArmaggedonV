@@ -3,23 +3,20 @@ import {
   ASTEROIDS_LIST_LOADED,
   ASTEROIDS_LIST_LOADING,
   ASTEROIDS_VIEW_LIST_UPDATE,
+  ASTEROID_DETAILS_LOADED,
   DESTROYED_LIST_UPDATE,
   LIST_COUNTER_INC,
 } from './actionTypes'
-import {
-  AsteroidListType,
-  AsteroidsActionTypes,
-  AsteroidsState,
-  AsteroidType,
-} from './types'
+import { AsteroidListType, AsteroidsActionTypes, AsteroidType } from './types'
 
-const initialState: AsteroidsState = {
+const initialState = {
   isLoading: false,
   asteroidsData: {},
   asteroidsArr: [],
   errMsg: '',
   listCounter: 0,
   destroyedList: [],
+  asteroidDetails: [],
 }
 
 export default (state = initialState, action: AsteroidsActionTypes) => {
@@ -52,6 +49,8 @@ export default (state = initialState, action: AsteroidsActionTypes) => {
         ...state,
         destroyedList: action.payload,
       }
+    case ASTEROID_DETAILS_LOADED:
+      return { ...state, asteroidDetails: action.payload, isLoading: false }
     default:
       return state
   }
