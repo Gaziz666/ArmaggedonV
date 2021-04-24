@@ -7,6 +7,7 @@ import { Spinner } from '../../components/spinner/Spinner'
 import { fetchAsteroidDetails } from '../../features/asteroids/asteroidsActions'
 import { AsteroidType } from '../../features/asteroids/types'
 import { RootReducerType } from '../../store'
+import styles from './asteroid-details.module.css'
 
 const AsteroidDetails: React.FC = () => {
   const match = useRouteMatch<{ id: string }>()
@@ -33,10 +34,10 @@ const AsteroidDetails: React.FC = () => {
   }, [])
 
   return (
-    <>
+    <section className={styles.section}>
       {asteroid ? <AsteroidItem asteroid={asteroid} /> : null}
       {isLoading ? <Spinner /> : <DetailList />}
-    </>
+    </section>
   )
 }
 

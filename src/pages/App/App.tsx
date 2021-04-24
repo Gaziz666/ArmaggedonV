@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { HashRouter, Switch, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Header } from '../../components/header/Header'
 import { Asteroids } from '../asteroids/Asteroids'
@@ -50,7 +50,7 @@ const App: React.FC = () => {
   }, [asteroidsArr])
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div ref={main} className={styles.main}>
         <Header />
         <Switch>
@@ -61,7 +61,7 @@ const App: React.FC = () => {
         </Switch>
         <Footer />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
