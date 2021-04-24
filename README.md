@@ -1,5 +1,15 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Armagedon V
+
+Armagedon V is an test app for review
+deploy: [https://gaziz666.github.io/rslang/#/](https://gaziz666.github.io/rslang/#/)
+
+
+## BackEnd API 
+
+API NASA. [https://api.nasa.gov](https://api.nasa.gov) Asteroids - NeoWs
+
 ## Available Scripts
 
 In the project directory, you can run:
