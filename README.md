@@ -3,10 +3,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Armagedon V
 
 Armagedon V is an test app for review
-deploy: [https://gaziz666.github.io/rslang/#/](https://gaziz666.github.io/rslang/#/)
+deploy: [https://gaziz666.github.io/armaggedonV/#/asteroids](https://gaziz666.github.io/armaggedonV/#/asteroids)
 
-
-## BackEnd API 
+## BackEnd API
 
 API NASA. [https://api.nasa.gov](https://api.nasa.gov) Asteroids - NeoWs
 
