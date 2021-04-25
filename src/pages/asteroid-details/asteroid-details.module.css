@@ -1,9 +1,0 @@
-.section {
-  display: flex;
-  max-width: 920px;
-  width: 100%;
-  overflow: hidden;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}

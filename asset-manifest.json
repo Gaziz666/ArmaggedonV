@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/armaggedonV/static/css/main.0eed128a.chunk.css",
+    "main.js": "/armaggedonV/static/js/main.9d3c86f0.chunk.js",
+    "main.js.map": "/armaggedonV/static/js/main.9d3c86f0.chunk.js.map",
+    "runtime-main.js": "/armaggedonV/static/js/runtime-main.394f08aa.js",
+    "runtime-main.js.map": "/armaggedonV/static/js/runtime-main.394f08aa.js.map",
+    "static/js/2.2713ba17.chunk.js": "/armaggedonV/static/js/2.2713ba17.chunk.js",
+    "static/js/2.2713ba17.chunk.js.map": "/armaggedonV/static/js/2.2713ba17.chunk.js.map",
+    "index.html": "/armaggedonV/index.html",
+    "static/css/main.0eed128a.chunk.css.map": "/armaggedonV/static/css/main.0eed128a.chunk.css.map",
+    "static/js/2.2713ba17.chunk.js.LICENSE.txt": "/armaggedonV/static/js/2.2713ba17.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/armaggedonV/static/media/Helvetica.06113bf7.ttf",
+    "static/media/dino.2faf6d60.svg": "/armaggedonV/static/media/dino.2faf6d60.svg",
+    "static/media/explosion.8761de44.gif": "/armaggedonV/static/media/explosion.8761de44.gif",
+    "static/media/meteorSvg.75ca4f33.svg": "/armaggedonV/static/media/meteorSvg.75ca4f33.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.394f08aa.js",
+    "static/js/2.2713ba17.chunk.js",
+    "static/css/main.0eed128a.chunk.css",
+    "static/js/main.9d3c86f0.chunk.js"
+  ]
+}
