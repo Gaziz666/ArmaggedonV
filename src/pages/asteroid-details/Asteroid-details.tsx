@@ -29,7 +29,7 @@ const AsteroidDetails: React.FC = () => {
     })
     setAsteroid(asteroidItem)
     if (asteroidItem) {
-      dispatch(fetchAsteroidDetails(asteroidItem!.links.self))
+      dispatch(fetchAsteroidDetails(asteroidItem!.id))
     }
   }, [])
 

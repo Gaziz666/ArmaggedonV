@@ -18,6 +18,7 @@ const DetailItem: React.FC<Props> = ({ detail }: Props) => {
     relative_velocity: velocity,
     miss_distance: misDistance,
     epoch_date_close_approach: dateMs,
+    orbiting_body: orbit,
   } = detail
 
   moment.locale('ru')
@@ -48,6 +49,12 @@ const DetailItem: React.FC<Props> = ({ detail }: Props) => {
             ? `${Math.round(+misDistance.lunar)} л`
             : `${Math.round(+misDistance.kilometers)} км`}
         </div>
+      </div>
+
+      <div className={styles['info-text-container']}>
+        <div>Орбита:</div>
+        <div />
+        <div>{orbit}</div>
       </div>
     </div>
   )

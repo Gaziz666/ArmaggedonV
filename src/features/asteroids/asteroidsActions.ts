@@ -73,12 +73,16 @@ export const fetchAsteroidList = (date?: string) => async (
   }
 }
 
-export const fetchAsteroidDetails = (url: string) => async (
+export const fetchAsteroidDetails = (id: string) => async (
   dispatch: Dispatch<AsteroidsActionTypes>
 ) => {
   dispatch(asteroidListRequested())
   try {
-    const response = await API.get(url)
+    const response = await API.get(`/neo/${id}`, {
+      params: {
+        api_key: APIkey,
+      },
+    })
     dispatch(saveAsteroidDetails(response.data.close_approach_data))
   } catch (err) {
     dispatch(asteroidListLoadErr(err.message))

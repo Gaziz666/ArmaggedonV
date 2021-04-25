@@ -13,7 +13,7 @@ const DetailList: React.FC = () => {
 
   useEffect(() => {
     const newDatalList = detailArr.map((item: DetailType) => {
-      return <DetailItem detail={item} />
+      return <DetailItem detail={item} key={item.epoch_date_close_approach} />
     })
     setDetailList(newDatalList)
   }, [detailArr])
