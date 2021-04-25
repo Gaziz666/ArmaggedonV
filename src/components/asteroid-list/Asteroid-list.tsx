@@ -43,8 +43,8 @@ const AsteroidList: React.FC = () => {
     }
 
     if (scrollIsDown && listCounter < length - 1) {
-      dispatch(scrollDown(false))
       dispatch(listCounterInc())
+      dispatch(scrollDown(false))
     } else if (scrollIsDown && listCounter === length - 1 && !isLoading) {
       const dateList = Object.keys(asteroidsData).sort()
       const lastDate = dateList[listCounter]

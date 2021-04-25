@@ -15,6 +15,9 @@ const App: React.FC = () => {
   const asteroidsArr = useSelector(
     (state: RootReducerType) => state.asteroidsState.asteroidsArr
   )
+  const isDanger = useSelector(
+    (state: RootReducerType) => state.filterState.isDanger
+  )
 
   const main = useRef<HTMLDivElement>(null)
   const dispatch = useDispatch()
@@ -37,17 +40,13 @@ const App: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    if (
-      asteroidsArr &&
-      !(
-        (main.current! as HTMLElement).scrollHeight -
-          Math.abs((main.current! as HTMLElement).scrollTop) ===
-        (main.current! as HTMLElement).clientHeight
-      )
-    ) {
+    const hasVerticalScrollbar =
+      (main.current! as HTMLElement).scrollHeight >
+      (main.current! as HTMLElement).clientHeight
+    if (asteroidsArr && !hasVerticalScrollbar) {
       dispatch(scrollDown(true))
     }
-  }, [asteroidsArr])
+  }, [asteroidsArr, isDanger])
 
   return (
     <HashRouter>
