@@ -8,6 +8,7 @@
   font-size: 16px;
   line-height: 20px;
   min-width: 180px;
+  cursor: pointer;
 }
 
 .radio-input:checked + .checkbox-text {
