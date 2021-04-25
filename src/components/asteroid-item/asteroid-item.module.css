@@ -1,0 +1,160 @@
+.item-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  min-height: 200px;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.bcg-normal {
+  background: linear-gradient(90deg, #cff37d 0%, #7de88c 100%);
+}
+
+.bcg-danger {
+  background: linear-gradient(90deg, #ffb199 0%, #ff0844 100%);
+}
+
+.dino-bcg-normal {
+  background: none;
+}
+
+.dino-bcg-danger {
+  background: none;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 31.4%;
+}
+
+.info-name {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 32px;
+  text-decoration-line: underline;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.info-text-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.info-text-container div:nth-child(2) {
+  flex: 1 0;
+  border-bottom: 1px dotted #000;
+  height: 1em;
+  margin: 0 0.4em;
+}
+
+.danger-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  width: 30.8%;
+}
+
+.danger-block-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 185px;
+}
+
+.danger {
+  font-weight: bold;
+}
+
+.dino-block {
+  display: flex;
+  width: 37.7%;
+  height: 198px;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.dino {
+  align-self: flex-start;
+  margin-left: 16px;
+  margin-right: 8px;
+}
+
+.dino-img {
+  width: 100%;
+  height: 100%;
+}
+
+.asteroid-img-wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 750px) {
+  .item-container {
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 391px;
+    max-width: 500px;
+    margin-bottom: 19px;
+  }
+
+  .info {
+    width: 100%;
+    padding: 0 16px;
+    margin-bottom: 16px;
+  }
+
+  .danger-block {
+    width: 100%;
+    align-items: center;
+  }
+
+  .dino-block {
+    width: 100%;
+    height: 198px;
+  }
+
+  .dino {
+    align-self: flex-end;
+  }
+
+  .info-name {
+    margin-bottom: 24px;
+    margin-top: -55px;
+  }
+
+  .bcg-normal {
+    background: none;
+  }
+
+  .bcg-danger {
+    background: none;
+  }
+
+  .dino-bcg-normal {
+    background: linear-gradient(90deg, #cff37d 0%, #7de88c 100%);
+  }
+
+  .dino-bcg-danger {
+    background: linear-gradient(90deg, #ffb199 0%, #ff0844 100%);
+  }
+
+  .dino-img {
+    width: 35px;
+    height: 30px;
+  }
+}

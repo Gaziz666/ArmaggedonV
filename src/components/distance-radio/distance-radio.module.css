@@ -1,0 +1,27 @@
+.radio-input {
+  display: none;
+}
+
+.checkbox-text {
+  text-decoration: underline;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  min-width: 180px;
+  cursor: pointer;
+}
+
+.radio-input:checked + .checkbox-text {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.break {
+  display: none;
+}
+
+@media (max-width: 415px) {
+  .break {
+    display: inline;
+  }
+}
